@@ -1,23 +1,24 @@
-import type { Metadata } from "next";
-import { IBM_Plex_Serif, Mona_Sans } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { IBM_Plex_Serif, Mona_Sans } from 'next/font/google';
+import './globals.css';
+import Navbar from '@/components/Navbar';
 
 const ibmPlexSerif = IBM_Plex_Serif({
-  variable: "--font-ibm-plex-serif",
+  variable: '--font-ibm-plex-serif',
   weight: ['400', '500', '600', '700'],
-  subsets: ["latin"],
-  display: 'swap'
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 const monaSans = Mona_Sans({
-  variable: "--font-mona-sans",
-  subsets: ["latin"],
-  display: 'swap'
+  variable: '--font-mona-sans',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Readora",
-  description: "A simple and elegant AI pdf reader.",
+  title: 'Readora',
+  description: 'A simple and elegant AI pdf reader.',
 };
 
 export default function RootLayout({
@@ -30,7 +31,10 @@ export default function RootLayout({
       lang="en"
       className={`${ibmPlexSerif.variable} ${monaSans.variable} relative font-sans antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
