@@ -1,5 +1,3 @@
 export default function Home() {
-  return (
-    <div>Readora</div>
-  );
+  return <div></div>;
 }

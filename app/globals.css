@@ -285,7 +285,7 @@
 
   /* Layout utilities */
   .navbar-height {
-    @apply h-[var(--navbar-height)];
+    @apply h-(--navbar-height);
   }
 
   /* Typography utilities */
@@ -293,7 +293,7 @@
     @apply text-[var(--color-brand)];
   }
   .border-brand {
-    @apply border-[var(--color-brand)];
+    @apply border-(--color-brand);
   }
   .page-title-xl {
     @apply text-4xl md:text-5xl font-semibold text-black tracking-[-0.02em] leading-[54px] font-serif;
