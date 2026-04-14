@@ -1,3 +1,11 @@
-export default async function Home() {
-  return <div>Hi</div>;
-}
+import HeroSection from '@/components/HeroSection';
+
+const HomePage = () => {
+  return (
+    <main className="wrapper container">
+      <HeroSection />
+    </main>
+  );
+};
+
+export default HomePage;
