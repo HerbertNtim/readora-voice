@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Upload, ImageIcon } from 'lucide-react';
@@ -16,16 +16,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  ACCEPTED_PDF_TYPES,
-  ACCEPTED_IMAGE_TYPES,
-  DEFAULT_VOICE,
-} from '@/lib/constants';
+import { ACCEPTED_PDF_TYPES, ACCEPTED_IMAGE_TYPES } from '@/lib/constants';
 import FileUploader from './FileUploader';
 import VoiceSelector from './VoiceSelector';
-import { useAuth, useUser } from '@clerk/nextjs';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 const UploadForm = () => {
   const form = useForm<BookUploadFormValues>({
@@ -38,6 +31,8 @@ const UploadForm = () => {
       coverImage: undefined,
     },
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {};
 
