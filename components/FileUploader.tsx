@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useController, FieldValues } from 'react-hook-form';
 import { X } from 'lucide-react';
 import { FileUploadFieldProps } from '@/types';
@@ -24,7 +24,7 @@ const FileUploader = <T extends FieldValues>({
 }: FileUploadFieldProps<T>) => {
   const {
     field: { onChange, value },
-  } = useController({ name, control });
+  } = useController<T>({ name, control });
 
   const inputRef = useRef<HTMLInputElement>(null);
 
