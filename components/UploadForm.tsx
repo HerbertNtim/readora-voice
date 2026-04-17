@@ -8,23 +8,25 @@ import {
 import { UploadSchema } from '@/lib/zod';
 import { BookUploadFormValues } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
-import { Form, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
 import LoadingOverlay from './LoadingOverlay';
 import FileUploader from './FileUploader';
 import { Upload } from 'lucide-react';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const UploadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
-
-  // if (!isMounted) {
-  //   return null;
-  // }
 
   const form = useForm<BookUploadFormValues>({
     resolver: zodResolver(UploadSchema),
@@ -70,9 +72,31 @@ const UploadForm = () => {
               hint="Leave empty to auto-generate from PDF"
               disabled={isSubmitting}
             />
+
+            {/* 3. Title Input */}
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="form-label">Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="form-input"
+                      placeholder="ex: Rich Dad Poor Dad"
+                      {...field}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </form>
         </Form>
       </div>
     </>
   );
 };
+
+export default UploadForm;
