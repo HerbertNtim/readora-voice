@@ -9,7 +9,7 @@ import { UploadSchema } from '@/lib/zod';
 import { BookUploadFormValues } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import LoadingOverlay from './LoadingOverlay';
 import FileUploader from './FileUploader';
@@ -23,10 +23,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import VoiceSelector from './VoiceSelector';
+import { Button } from './ui/button';
 
 const UploadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const form = useForm<BookUploadFormValues>({
     resolver: zodResolver(UploadSchema),
@@ -48,7 +49,7 @@ const UploadForm = () => {
 
       <div className="new-book-wrapper">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {/* 1. PDF File Upload */}
             <FileUploader
               control={form.control}
@@ -92,6 +93,56 @@ const UploadForm = () => {
                 </FormItem>
               )}
             />
+
+            {/* 4. Author Input */}
+            <FormField
+              control={form.control}
+              name="author"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="form-label">Author</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="form-input"
+                      placeholder="ex: Robert Kiyosaki"
+                      {...field}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* 5. Voice Selector */}
+            <FormField
+              control={form.control}
+              name="persona"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="form-label">
+                    Choose Voice Assistant
+                  </FormLabel>
+                  <FormControl>
+                    <VoiceSelector
+                      value={field.value}
+                      onChange={field.onChange}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* 6. Submit Button */}
+            <Button
+              type="submit"
+              className={'form-btn'}
+              disabled={isSubmitting}
+            >
+              Begin Synthesis
+            </Button>
           </form>
         </Form>
       </div>
