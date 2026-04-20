@@ -15,3 +15,22 @@ declare global {
 const cached =
   global.mongooseCache ||
   (global.mongooseCache = { conn: null, promise: null });
+
+export const connectToDatabase = async () => {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.conn) {
+    cached.promise = mongoose.connect(MONGODB_URL, { bufferCommands: false });
+  }
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    console.error('MongoDB connection error. Keep MongoDB running ', error);
+    throw error;
+  }
+
+  console.info('Connected to MongoDB');
+  return cached.conn;
+};
