@@ -46,7 +46,7 @@ export const createBook = async (bookData: CreateBook) => {
       return {
         success: true,
         bookData: serializeData(existingBook),
-        existing: true,
+        alreadyExists: true,
       };
     }
 

@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 import LoadingOverlay from './LoadingOverlay';
 import FileUploader from './FileUploader';
-import { Upload, UserRoundIcon } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -25,15 +25,19 @@ import {
 import { Input } from '@/components/ui/input';
 import VoiceSelector from './VoiceSelector';
 import { Button } from './ui/button';
-import { useUser } from '@clerk/nextjs';
+import { useAuth } from '@clerk/nextjs';
 import { toast } from 'sonner';
-import { checkExistingBook, createBook } from '@/lib/actions/book.actions';
+import {
+  checkExistingBook,
+  createBook,
+  saveBookSegments,
+} from '@/lib/actions/book.actions';
 import { useRouter } from 'next/router';
 import { parsePDFFile } from '@/lib/utils';
-import { handleUpload, upload } from '@vercel/blob/client';
+import { upload } from '@vercel/blob/client';
 
 const UploadForm = () => {
-  const { user } = useUser();
+  const { userId } = useAuth();
   const router = useRouter();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,11 +48,13 @@ const UploadForm = () => {
       title: '',
       author: '',
       persona: DEFAULT_VOICE,
+      pdfFile: undefined,
+      coverImage: undefined,
     },
   });
 
   const onSubmit = async (bookData: BookUploadFormValues) => {
-    if (!user) {
+    if (!userId) {
       toast.error('Please, log in to upload a pdf');
       form.reset();
       return;
@@ -77,7 +83,7 @@ const UploadForm = () => {
         return;
       }
 
-      const uploadedCoverBlob = await upload(fileTitle, pdfFile, {
+      const uploadedPDFBlob = await upload(fileTitle, pdfFile, {
         access: 'public',
         handleUploadUrl: '/api/upload',
         contentType: 'application/pdf',
@@ -112,13 +118,40 @@ const UploadForm = () => {
       }
 
       const book = await createBook({
-        clerkId: UserRoundIcon,
+        clerkId: userId,
         title: bookData.title,
         author: bookData.author,
         persona: bookData.persona,
-        fileURL: uploadedPdf.pathname,
-        fileBlobKey: uploadedPdfBlob.pathname,
+        fileURL: uploadedPDFBlob.url,
+        fileBlobKey: uploadedPDFBlob.pathname,
+        coverURL: coverUrl,
+        fileSize: pdfFile.size,
       });
+
+      if (!book.success) {
+        throw new Error('Failed to create book');
+      }
+
+      if (book.alreadyExists) {
+        toast.info('Book already exists.');
+        form.reset();
+        router.push(`/books/${existingBook.book.slug}`);
+        return;
+      }
+
+      const segments = await saveBookSegments(
+        book.bookData._id,
+        userId,
+        parsedPdf.content,
+      );
+
+      if (!segments?.success) {
+        toast.error('Failed to save book segments');
+        throw new Error('Failed to save book segments');
+      }
+
+      form.reset();
+      router.push('/');
     } catch (error) {
       console.error('Error Uploading pdf ', error);
       toast.error('Failed to upload pdf');
