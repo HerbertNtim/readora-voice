@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 import LoadingOverlay from './LoadingOverlay';
 import FileUploader from './FileUploader';
-import { Upload } from 'lucide-react';
+import { Upload, UserRoundIcon } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -27,9 +27,10 @@ import VoiceSelector from './VoiceSelector';
 import { Button } from './ui/button';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
-import { checkExistingBook } from '@/lib/actions/book.actions';
+import { checkExistingBook, createBook } from '@/lib/actions/book.actions';
 import { useRouter } from 'next/router';
 import { parsePDFFile } from '@/lib/utils';
+import { handleUpload, upload } from '@vercel/blob/client';
 
 const UploadForm = () => {
   const { user } = useUser();
@@ -75,6 +76,49 @@ const UploadForm = () => {
         );
         return;
       }
+
+      const uploadedCoverBlob = await upload(fileTitle, pdfFile, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+        contentType: 'application/pdf',
+      });
+
+      let coverUrl: string;
+
+      if (bookData.coverImage) {
+        const coverFile = bookData.coverImage;
+        const uploadedCoverBlob = await upload(
+          `${fileTitle}_cover.png`,
+          coverFile,
+          {
+            access: 'public',
+            handleUploadUrl: '/api/upload',
+            contentType: coverFile.type,
+          },
+        );
+
+        coverUrl = uploadedCoverBlob.url;
+      } else {
+        const getPDFCoverImage = await fetch(parsedPdf.cover);
+        const blob = await getPDFCoverImage.blob();
+
+        const uploadedCoverBlob = await upload(`${fileTitle}_cover.png`, blob, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+          contentType: 'image/png',
+        });
+
+        coverUrl = uploadedCoverBlob.url;
+      }
+
+      const book = await createBook({
+        clerkId: UserRoundIcon,
+        title: bookData.title,
+        author: bookData.author,
+        persona: bookData.persona,
+        fileURL: uploadedPdf.pathname,
+        fileBlobKey: uploadedPdfBlob.pathname,
+      });
     } catch (error) {
       console.error('Error Uploading pdf ', error);
       toast.error('Failed to upload pdf');
