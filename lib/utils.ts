@@ -84,11 +84,11 @@ export const getVoice = (persona?: string) => {
 };
 
 // Format duration in seconds to MM:SS format
-export const formatDuration = (seconds: number): string => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-};
+// export const formatDuration = (seconds: number): string => {
+//   const mins = Math.floor(seconds / 60);
+//   const secs = seconds % 60;
+//   return `${mins}:${secs.toString().padStart(2, '0')}`;
+// };
 
 export async function parsePDFFile(file: File) {
   try {
@@ -124,6 +124,7 @@ export async function parsePDFFile(file: File) {
     await firstPage.render({
       canvasContext: context,
       viewport: viewport,
+      canvas: canvas,
     }).promise;
 
     // Convert canvas to data URL
