@@ -6,6 +6,30 @@ import { generateSlug, serializeData } from '@/lib/utils';
 import Book from '@/database/models/book.model';
 import BookSegment from '@/database/models/book-segments.model';
 
+export const checkExistBook = async (title: string) => {
+  try {
+    await connectToDatabase();
+
+    const slug = generateSlug(title);
+
+    const existingBook = await Book.findOne({ slug });
+
+    if (existingBook) {
+      return {
+        exists: true,
+        bookData: serializeData(existingBook),
+      };
+    }
+  } catch (error) {
+    console.error('Error checking existing book', error);
+
+    return {
+      exists: false,
+      error,
+    };
+  }
+};
+
 export const createBook = async (bookData: CreateBook) => {
   try {
     await connectToDatabase();
