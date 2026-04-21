@@ -32,7 +32,7 @@ import {
   createBook,
   saveBookSegments,
 } from '@/lib/actions/book.actions';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { parsePDFFile } from '@/lib/utils';
 import { upload } from '@vercel/blob/client';
 
