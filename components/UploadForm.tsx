@@ -25,8 +25,16 @@ import {
 import { Input } from '@/components/ui/input';
 import VoiceSelector from './VoiceSelector';
 import { Button } from './ui/button';
+import { useUser } from '@clerk/nextjs';
+import { toast } from 'sonner';
+import { checkExistingBook } from '@/lib/actions/book.actions';
+import { useRouter } from 'next/router';
+import { parsePDFFile } from '@/lib/utils';
 
 const UploadForm = () => {
+  const { user } = useUser();
+  const router = useRouter();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<BookUploadFormValues>({
@@ -38,9 +46,41 @@ const UploadForm = () => {
     },
   });
 
-  const onSubmit = async (data: BookUploadFormValues) => {
+  const onSubmit = async (bookData: BookUploadFormValues) => {
+    if (!user) {
+      toast.error('Please, log in to upload a pdf');
+      form.reset();
+      return;
+    }
+
     setIsSubmitting(true);
-    console.log(data);
+
+    try {
+      const existingBook = await checkExistingBook(bookData.title);
+
+      if (existingBook.exists && existingBook.book) {
+        toast.info('Book already exists.');
+        form.reset();
+        router.push(`/books/${existingBook.book.slug}`);
+        return;
+      }
+
+      const fileTitle = bookData.title.replace(/\s+/g, '-').toLowerCase();
+      const pdfFile = bookData.pdfFile;
+      const parsedPdf = await parsePDFFile(pdfFile);
+
+      if (parsedPdf.content.length === 0) {
+        toast.error(
+          'Failed to parse PDF. Please Upload a new PDF file to continue',
+        );
+        return;
+      }
+    } catch (error) {
+      console.error('Error Uploading pdf ', error);
+      toast.error('Failed to upload pdf');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

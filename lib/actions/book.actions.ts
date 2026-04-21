@@ -6,7 +6,7 @@ import { generateSlug, serializeData } from '@/lib/utils';
 import Book from '@/database/models/book.model';
 import BookSegment from '@/database/models/book-segments.model';
 
-export const checkExistBook = async (title: string) => {
+export const checkExistingBook = async (title: string) => {
   try {
     await connectToDatabase();
 
