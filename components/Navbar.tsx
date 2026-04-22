@@ -19,7 +19,13 @@ const Navbar = () => {
     <header className="w-full fixed z-50 bg-(--bg-primary)">
       <div className="wrapper flex items-center justify-between navbar-height py-4">
         <Link href="/" className="flex items-center gap-0.5">
-          <Image src="/logo.png" alt="Readora Logo" width={42} height={26} />
+          <Image
+            src="/logo.png"
+            alt="Readora Logo"
+            width={42}
+            height={26}
+            style={{ width: 42, height: 26 }}
+          />
           <span className="logo-text">Readora</span>
         </Link>
 
