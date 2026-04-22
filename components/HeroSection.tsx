@@ -34,6 +34,7 @@ const HeroSection = () => {
               width={400}
               height={400}
               className="object-contain"
+              style={{ width: 400, height: 400 }}
             />
           </div>
 
