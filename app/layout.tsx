@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { IBM_Plex_Serif, Mona_Sans } from 'next/font/google';
 import './globals.css';
+import { ui } from '@clerk/ui';
 import Navbar from '@/components/Navbar';
 import { Toaster } from 'sonner';
 
@@ -34,7 +35,7 @@ export default function RootLayout({
       className={`${ibmPlexSerif.variable} ${monaSans.variable} relative font-sans antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ClerkProvider>
+        <ClerkProvider ui={ui}>
           <Navbar />
           {children}
           <Toaster />
