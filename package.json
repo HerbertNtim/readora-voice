@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "prepare": "husky || true"
+    "prepare": "command -v husky >/dev/null 2>&1 && husky"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
