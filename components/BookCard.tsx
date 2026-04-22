@@ -14,6 +14,7 @@ const BookCard = ({ title, author, coverURL, slug }: BookCardProps) => {
               width={133}
               height={200}
               className="book-card-cover"
+              style={{ width: 133, height: 200 }}
             />
           </div>
 
