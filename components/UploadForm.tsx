@@ -129,6 +129,7 @@ const UploadForm = () => {
       });
 
       if (!book.success) {
+        toast.error('Unable to add book');
         throw new Error('Failed to create book');
       }
 
