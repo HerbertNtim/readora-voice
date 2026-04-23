@@ -78,7 +78,7 @@ export const saveBookSegments = async (
       ({ text, segmentIndex, pageNumber, wordCount }) => ({
         bookId,
         clerkId,
-        text,
+        content: text,
         segmentIndex,
         pageNumber,
         wordCount,
