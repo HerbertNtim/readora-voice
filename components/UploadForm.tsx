@@ -145,15 +145,15 @@ const UploadForm = () => {
         parsedPdf.content,
       );
 
-      if (!segments?.success) {
-        toast.error('Failed to save book segments');
+      if (!segments) {
+        toast.error('Failed to save book segments. Try Again!!');
         throw new Error('Failed to save book segments');
       }
 
       form.reset();
       router.push('/');
     } catch (error) {
-      console.error('Error Uploading pdf ', error);
+      console.error('Error Book Uploading pdf ', error);
       toast.error('Failed to upload pdf');
     } finally {
       setIsSubmitting(false);

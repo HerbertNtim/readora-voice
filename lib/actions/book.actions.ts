@@ -85,7 +85,7 @@ export const saveBookSegments = async (
       }),
     );
 
-    await Book.insertMany(segmentsToInsert);
+    await BookSegment.insertMany(segmentsToInsert);
     await Book.findByIdAndUpdate(bookId, { totalSegment: segments.length });
 
     console.log('Book Segments saved successfully...');
@@ -101,5 +101,10 @@ export const saveBookSegments = async (
     await Book.findByIdAndDelete(bookId);
 
     console.log('Deleted book segment and book due to error...');
+
+    return {
+      success: false,
+      error: 'Failed to save book segments',
+    };
   }
 };
