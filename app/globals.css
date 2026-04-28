@@ -417,17 +417,17 @@
     @apply hidden;
   }
   .vapi-cover-image {
-    @apply relative w-[130px] h-[195px] sm:w-[162px] sm:h-[240px] rounded-lg object-cover;
+    @apply relative w-32.5 h-48.75 sm:w-40.5 sm:h-60 rounded-lg object-cover;
     box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
   }
   .vapi-mic-wrapper {
-    @apply absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2;
+    @apply -bottom-1 -right-1 sm:-bottom-2 sm:-right-2;
   }
   .vapi-pulse-ring {
-    @apply absolute inset-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] bg-white rounded-full opacity-50 animate-ping;
+    @apply absolute inset-0 w-12.5 h-12.5 sm:w-15 sm:h-15 bg-white rounded-full opacity-50 animate-ping;
   }
   .vapi-mic-btn {
-    @apply relative w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] cursor-pointer rounded-full flex items-center justify-center transition-all duration-300 border-0 bg-white;
+    @apply w-12.5 h-12.5 sm:w-15 sm:h-15 cursor-pointer rounded-full flex items-center justify-center transition-all duration-300 border-0 bg-white;
 
     &:hover {
       transform: scale(1.05);
@@ -449,7 +449,7 @@
     @apply bg-white;
   }
   .vapi-badge-ai {
-    @apply inline-block bg-white px-3 py-2 rounded-[4px];
+    @apply inline-block bg-white px-3 py-2 rounded-lg;
   }
   .vapi-badge-ai-text {
     @apply text-sm font-medium text-[#212a3b];
@@ -698,7 +698,7 @@
      UPLOAD FORM COMPONENT
      =========================================== */
   .upload-dropzone {
-    @apply flex flex-col items-center justify-center h-[165px] bg-white rounded-[6px] cursor-pointer transition-all;
+    @apply flex flex-col items-center justify-center h-41.25 bg-white rounded-[6px] cursor-pointer transition-all;
 
     &:hover {
       @apply bg-gray-50;
@@ -715,7 +715,7 @@
     }
   }
   .upload-dropzone-icon {
-    @apply w-[48px] h-[48px] mb-2 text-[#8B7355];
+    @apply w-12 h-12 mb-2 text-[#8B7355];
   }
   .upload-dropzone-text {
     @apply text-[#777] text-lg font-medium text-center;
@@ -741,7 +741,7 @@
      BACK BUTTON (FLOATING)
      =========================================== */
   .back-btn-floating {
-    @apply fixed top-24 left-6 z-50 size-12 rounded-full bg-white border border-[var(--border-subtle)] flex items-center justify-center transition-all;
+    @apply fixed top-24 left-6 z-50 size-12 rounded-full bg-white border border-(--border-subtle) flex items-center justify-center transition-all;
     box-shadow: var(--shadow-soft);
 
     &:hover {
