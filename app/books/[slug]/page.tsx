@@ -4,6 +4,7 @@ import { ArrowLeft, Mic, MicOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { toast } from 'sonner';
 
 const BookDetails = async ({
   params,
@@ -13,7 +14,7 @@ const BookDetails = async ({
   const { userId } = await auth();
 
   if (!userId) {
-    redirect('/sign-in');
+    redirect('/');
   }
 
   const { slug } = await params;
@@ -32,20 +33,36 @@ const BookDetails = async ({
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
         {/* HEADER CARD */}
         <div className="vapi-header-card">
-          <Image
-            src={book.coverURL}
-            alt={book.title}
-            width={120}
-            height={180}
-            style={{ width: 120, height: 180 }}
-            className="vapi-cover-image w-30! h-auto!"
-            priority
-          />
+          <div className="vapi-cover-wrapper">
+            <Image
+              src={book.coverURL}
+              alt={book.title}
+              width={120}
+              height={180}
+              style={{ width: 120, height: 180 }}
+              className="vapi-cover-image w-30! h-auto!"
+              priority
+            />
 
-          <div className="vapi-mic-wrapper">
-            <button className="vapi-mic-btn vapi-mic-btn-inactive shadow-md w-15! h-15!">
-              <MicOff className="size-7 text-[#212a3b]" />
-            </button>
+            <div className="vapi-mic-wrapper relative">
+              <button className="vapi-mic-btn vapi-mic-btn-inactive shadow-md w-15! h-15!">
+                <MicOff className="size-7 text-[#212a3b]" />
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 flex-1">
+            <h1 className="text-2xl sm:text-3xl font-bold font-serif text-[#212a3] mb-1">
+              {book.title}
+            </h1>
+            <p className="text-[#3d485e] font-medium">{book.author}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <div className="vapi-status-indicator">
+              <span className="vapi-status-dot" />
+              <span className="vapi-status-text">Listening</span>
+            </div>
           </div>
         </div>
 
