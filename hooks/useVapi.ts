@@ -1,6 +1,7 @@
+import { DEFAULT_VOICE } from '@/lib/constants';
 import { IBook, Messages } from '@/types';
 import { useAuth } from '@clerk/nextjs';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export type CallStatus =
   | 'idle'
@@ -11,7 +12,16 @@ export type CallStatus =
   | 'thinking'
   | 'speaking';
 
-export const useVapi = (book: IBook) => {
+const useLatestRef = <T>(value: T) => {
+  const ref = useRef(value);
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref;
+};
+
+const useVapi = (book: IBook) => {
   const { userId } = useAuth();
 
   const [status, setStatus] = useState<CallStatus>('idle');
@@ -24,4 +34,35 @@ export const useVapi = (book: IBook) => {
   const startTimerRef = useRef<NodeJS.Timeout | null>(null);
   const sessionIdRef = useRef<string | null>(null);
   const isStoppingRef = useRef<boolean>(false);
+
+  const bookRef = useLatestRef(book);
+  const durationRef = useLatestRef(duration);
+  const voice = book.persona || DEFAULT_VOICE;
+
+  const isActive =
+    status === 'listening' ||
+    status === 'thinking' ||
+    status === 'speaking' ||
+    status === 'starting';
+
+  // const maxDurationRef = useLatestRef(limits.maxSessionMinutes * 60)
+  // const maxDurationSeconds
+  // const remainingSeconds
+  // const showTimeWarning
+
+  const start = async () => {};
+  const stop = async () => {};
+  const clearErrors = async () => {};
+
+  return {
+    status,
+    isActive,
+    messages,
+    currentMessage,
+    currentUserMessage,
+    duration,
+    // maxDurationSeconds, remainingSeconds, showTimeWarning
+  };
 };
+
+export default useVapi;
