@@ -21,10 +21,9 @@ const VapiControls = ({ book }: { book: IBook }) => {
             />
             <div className="vapi-mic-wrapper absolute">
               <button
-                disabled={status === 'connecting'}
                 className={`vapi-mic-btn shadow-md w-15! h-15! z-1 'vapi-mic-btn-active' : 'vapi-mic-btn-inactive'}`}
               >
-                mic
+                <Mic className="size-7 text-[#212a3b]" />
               </button>
             </div>
           </div>
