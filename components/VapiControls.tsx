@@ -1,6 +1,7 @@
 'use client';
 
 import { IBook } from '@/types';
+import { Mic } from 'lucide-react';
 import Image from 'next/image';
 
 const VapiControls = ({ book }: { book: IBook }) => {
@@ -55,8 +56,14 @@ const VapiControls = ({ book }: { book: IBook }) => {
           </div>
         </div>
 
-        <div className="vapi-transcript-wrapper">
-          <div className="transcript-container min-h-100">Transcript</div>
+        <div className="transcript-container min-h-100">
+          <div className="transcript-empty">
+            <Mic className="size-12 text-[#212a3b] mb-4" />
+            <h2 className="transcript-empty-text">No Conversation Yet.</h2>
+            <p className="transcript-empty-hint">
+              Click the Mic button above to start talking.
+            </p>
+          </div>
         </div>
       </div>
     </>
