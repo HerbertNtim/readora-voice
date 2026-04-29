@@ -55,7 +55,7 @@ const BookDetails = async ({
             <h1 className="text-2xl sm:text-3xl font-bold font-serif text-[#212a3] mb-1">
               {book.title}
             </h1>
-            <p className="text-[#3d485e] font-medium">{book.author}</p>
+            <p className="text-[#3d485e] font-medium">by {book.author}</p>
           </div>
 
           <div className="flex flex-wrap gap-3">
