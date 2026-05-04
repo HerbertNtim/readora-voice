@@ -1,10 +1,23 @@
 'use client';
 
+import useVapi from '@/hooks/useVapi';
 import { IBook } from '@/types';
-import { Mic } from 'lucide-react';
+import { Mic, MicOff } from 'lucide-react';
 import Image from 'next/image';
 
 const VapiControls = ({ book }: { book: IBook }) => {
+  const {
+    status,
+    isActive,
+    messages,
+    currentMessage,
+    currentUserMessage,
+    duration,
+    start,
+    stop,
+    clearErrors,
+  } = useVapi(book);
+
   return (
     <>
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
@@ -21,9 +34,15 @@ const VapiControls = ({ book }: { book: IBook }) => {
             />
             <div className="vapi-mic-wrapper absolute">
               <button
-                className={`vapi-mic-btn shadow-md w-15! h-15! z-1 'vapi-mic-btn-active' : 'vapi-mic-btn-inactive'}`}
+                onClick={isActive ? stop : start}
+                disabled={status === 'connecting'}
+                className={`vapi-mic-btn shadow-md w-15! h-15! z-1 ${isActive ? 'vapi-mic-btn-active' : 'vapi-mic-btn-inactive'}`}
               >
-                <Mic className="size-7 text-[#212a3b]" />
+                {isActive ? (
+                  <Mic className="size-7 text-[#212a3b]" />
+                ) : (
+                  <MicOff className="size-7 text-[#212a3b]" />
+                )}
               </button>
             </div>
           </div>
@@ -39,7 +58,7 @@ const VapiControls = ({ book }: { book: IBook }) => {
             <div className="flex flex-wrap gap-3">
               <div className="vapi-status-indicator">
                 <span className={`vapi-status-dot`} />
-                <span className="vapi-status-text">Indicator</span>
+                <span className="vapi-status-text">{status}</span>
               </div>
 
               <div className="vapi-status-indicator">
