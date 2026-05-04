@@ -29,6 +29,7 @@ const useVapi = (book: IBook) => {
   const [currentMessage, setCurrentMessage] = useState('');
   const [currentUserMessage, setCurrentUserMessage] = useState('');
   const [duration, setDuration] = useState<string | null>(null);
+  const [limitError, setLimitError] = useState<string | null>(null);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const startTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -50,7 +51,19 @@ const useVapi = (book: IBook) => {
   // const remainingSeconds
   // const showTimeWarning
 
-  const start = async () => {};
+  const start = async () => {
+    if (!userId) return setLimitError('Please login to start a conversation.');
+
+    setLimitError(null);
+    setStatus('connecting');
+
+    try {
+    } catch (error) {
+      console.error('Error starting call.', error);
+      setStatus('idle');
+      setLimitError('An error occurred while starting the call.');
+    }
+  };
   const stop = async () => {};
   const clearErrors = async () => {};
 
@@ -61,6 +74,10 @@ const useVapi = (book: IBook) => {
     currentMessage,
     currentUserMessage,
     duration,
+    limitError,
+    start,
+    stop,
+    clearErrors,
     // maxDurationSeconds, remainingSeconds, showTimeWarning
   };
 };
