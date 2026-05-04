@@ -123,3 +123,8 @@ export interface StartSessionResult {
   maxDurationMinutes?: number;
   error?: string;
 }
+
+export interface EndSessionResult {
+  success: boolean;
+  error?: string;
+}
