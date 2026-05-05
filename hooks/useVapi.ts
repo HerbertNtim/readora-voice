@@ -116,7 +116,10 @@ const useVapi = (book: IBook) => {
       setLimitError('An error occurred while starting the call.');
     }
   };
-  const stop = async () => {};
+  const stop = async () => {
+    isStoppingRef.current = true;
+    await getVapi().stop();
+  };
   const clearErrors = async () => {};
 
   return {
