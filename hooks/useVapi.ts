@@ -37,7 +37,6 @@ function getVapi() {
     }
 
     vapi = new Vapi(VAPI_API_KEY);
-    console.log('API KEY EXISTS:', !!VAPI_API_KEY);
   }
   return vapi;
 }
@@ -91,9 +90,14 @@ const useVapi = (book: IBook) => {
 
       sessionIdRef.current = startSession.sessionId || null;
 
+      if (!ASSISTANT_ID) {
+        setLimitError('Assistant ID not configured.');
+        setStatus('idle');
+        return;
+      }
+
       const firstMessage = `Hey, good to meet you. Before we dive in: have you read ${book.title} yet? Or are we starting fresh?`;
 
-      console.log('starting vapi');
       await getVapi().start(ASSISTANT_ID, {
         firstMessage,
         variableValues: {
