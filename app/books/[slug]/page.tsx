@@ -1,11 +1,9 @@
 import VapiControls from '@/components/VapiControls';
 import { getBookBySlug } from '@/lib/actions/book.actions';
 import { auth } from '@clerk/nextjs/server';
-import { ArrowLeft, Mic, MicOff } from 'lucide-react';
-import Image from 'next/image';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { toast } from 'sonner';
 
 const BookDetails = async ({
   params,
