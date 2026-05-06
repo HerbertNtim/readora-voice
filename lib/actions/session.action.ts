@@ -12,6 +12,21 @@ export const startVoiceSession = async (
   try {
     await connectToDatabase();
 
+    // 1. Check for existing ACTIVE session
+    const existingSession = await VoiceSession.findOne({
+      clerkId,
+      bookId,
+      endedAt: { $exists: false }, // or status: "active"
+    });
+
+    if (existingSession) {
+      return {
+        success: true,
+        sessionId: existingSession._id.toString(),
+      };
+    }
+
+    // 2. Create new session only if none exists
     const session = await VoiceSession.create({
       clerkId,
       bookId,
@@ -26,6 +41,7 @@ export const startVoiceSession = async (
     };
   } catch (error) {
     console.error('Error starting voice session', error);
+
     return {
       success: false,
       error: 'Failed to start voice session. Please try again later.',
