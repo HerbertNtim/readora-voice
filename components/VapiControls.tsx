@@ -29,6 +29,7 @@ const VapiControls = ({ book }: { book: IBook }) => {
               alt={book.title}
               width={120}
               height={180}
+              style={{ width: 120, height: 180 }}
               className="vapi-cover-image w-30! h-auto!"
               priority
             />
