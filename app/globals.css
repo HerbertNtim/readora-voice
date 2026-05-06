@@ -456,13 +456,13 @@
     font-family: 'IBM Plex Serif', serif;
   }
   .vapi-status-indicator {
-    @apply flex items-center gap-2 bg-white px-3 py-2 rounded-[4px];
+    @apply flex items-center gap-2 bg-white px-3 py-2 rounded-lg;
   }
   .vapi-status-dot {
     @apply inline-block w-3 h-3 rounded-full;
   }
   .vapi-status-dot-ready {
-    @apply bg-gray-400;
+    @apply bg-gray-500;
   }
   .vapi-status-dot-connecting {
     @apply bg-yellow-500 animate-pulse;
@@ -508,10 +508,10 @@
     @apply flex flex-col items-center text-center lg:items-center lg:text-left lg:flex-row lg:justify-between gap-4 lg:gap-6 w-full;
   }
   .library-hero-text {
-    @apply flex-1 max-w-full lg:max-w-[400px] flex flex-col gap-3 lg:gap-4 items-center lg:items-start justify-center z-10;
+    @apply flex-1 max-w-full lg:max-w-100 flex flex-col gap-3 lg:gap-4 items-center lg:items-start justify-center z-10;
   }
   .library-hero-title {
-    @apply text-[26px] md:text-3xl lg:text-4xl font-semibold text-black tracking-[-0.02em] leading-[32px] md:leading-[42px] font-serif;
+    @apply text-[26px] md:text-3xl lg:text-4xl font-semibold text-black tracking-[-0.02em] leading-8 md:leading-10.5 font-serif;
   }
   .library-hero-description {
     @apply text-sm md:text-base text-[#3d485e] leading-5 md:leading-6;
@@ -520,7 +520,7 @@
     @apply flex items-center justify-center mt-2 lg:hidden;
   }
   .library-hero-illustration-desktop {
-    @apply hidden lg:flex items-center justify-center flex-1 max-w-[400px];
+    @apply hidden lg:flex items-center justify-center flex-1 max-w-100;
   }
   .library-cta-primary {
     @apply inline-flex items-center justify-center gap-2 bg-white text-(--text-primary) px-5 py-3 rounded-[10px] font-bold text-base md:text-xl transition-all w-full lg:w-fit;
@@ -552,7 +552,7 @@
     list-style: none;
   }
   .library-step-number {
-    @apply w-8 h-8 min-w-8 min-h-8 rounded-full bg-[#fff6e5] border border-[var(--text-primary)] text-[var(--text-primary)] flex items-center justify-center font-semibold text-sm;
+    @apply w-8 h-8 min-w-8 min-h-8 rounded-full bg-[#fff6e5] border border-(--text-primary) text-(--text-primary) flex items-center justify-center font-semibold text-sm;
   }
   .library-step-title {
     @apply font-semibold text-base text-[#222c37] leading-6;
@@ -561,7 +561,7 @@
     @apply font-normal text-sm text-[#222c37] leading-5;
   }
   .library-search-wrapper {
-    @apply flex items-center bg-white border border-[var(--border-subtle)] rounded-lg overflow-hidden w-full sm:w-80;
+    @apply flex items-center bg-white border border-(--border-subtle) rounded-lg overflow-hidden w-full sm:w-80;
   }
   .library-search-input {
     @apply flex-1 py-2 px-4 outline-none text-(--text-primary) placeholder:text-(--text-muted);
@@ -619,13 +619,13 @@
     @apply inline-block w-0.5 h-5 ml-1 bg-black animate-pulse;
   }
   .transcript-empty {
-    @apply flex flex-col items-center justify-center min-h-[350px] text-center flex-1;
+    @apply flex flex-col items-center justify-center min-h-87.5 text-center flex-1;
   }
   .transcript-empty-text {
-    @apply text-[var(--text-primary)] text-lg font-bold;
+    @apply text-(--text-primary) text-lg font-bold;
   }
   .transcript-empty-hint {
-    @apply text-[var(--text-muted)] text-sm mt-1;
+    @apply text-(--text-muted) text-sm mt-1;
   }
 
   /* ===========================================
@@ -635,7 +635,7 @@
     @apply flex gap-4;
   }
   .voice-selector-option {
-    @apply flex-1 flex items-center justify-center gap-3 p-4 border border-[var(--border-subtle)] rounded-lg cursor-pointer transition-all;
+    @apply flex-1 flex items-center justify-center gap-3 p-4 border border-(--border-subtle) rounded-lg cursor-pointer transition-all;
     box-shadow: var(--shadow-soft-sm);
 
     &:hover {
@@ -644,13 +644,13 @@
     }
   }
   .voice-selector-option-selected {
-    @apply bg-[var(--accent-light)] border-[var(--accent-warm)];
+    @apply bg-(--accent-light) border-(--accent-warm);
   }
   .voice-selector-option-default {
     @apply bg-white;
 
     &:hover {
-      @apply bg-[var(--bg-secondary)];
+      @apply bg-(--bg-secondary);
     }
   }
   .voice-selector-option-disabled {
