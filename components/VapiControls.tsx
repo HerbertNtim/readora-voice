@@ -77,14 +77,14 @@ const VapiControls = ({ book }: { book: IBook }) => {
         </div>
 
         <div className="vapi-transcript-wrapper">
-                <div className="transcript-container min-h-100">
-                    <Transcript
-                        messages={messages}
-                        currentMessage={currentMessage}
-                        currentUserMessage={currentUserMessage}
-                    />
-                </div>
-            </div>
+          <div className="transcript-container min-h-100">
+            <Transcript
+              messages={messages}
+              currentMessage={currentMessage}
+              currentUserMessage={currentUserMessage}
+            />
+          </div>
+        </div>
       </div>
     </>
   );
