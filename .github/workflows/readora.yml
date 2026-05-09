@@ -1,0 +1,114 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Cache miss, installing dependencies..."
+          npm install
+
+      - name: Save node_modules
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-modules
+          path: node_modules
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run lint and save output
+        id: lint
+        run: |
+          npm run lint | tee lint-output.txt
+
+      - name: Print lint output
+        if: steps.lint.outcome == 'success'
+        run: |
+          echo "Lint output:"
+          cat lint-output.txt
+          echo "Linting completed successfully!"
+
+      - name: Print lint error
+        if: steps.lint.outcome == 'failure'
+        run: |
+          echo "❌ Linting failed. Please fix the issues before merging."
+          cat lint-output.txt || echo "No output captured."
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+      CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+      NEXT_PUBLIC_ASSISTANT_ID: ${{ secrets.NEXT_PUBLIC_ASSISTANT_ID}}
+      NEXT_PUBLIC_VAPI_API_KEY: ${{ secrets.NEXT_PUBLIC_VAPI_API_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Download node_modules artifact
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: node-modules
+          path: node_modules
+
+      - name: Run npm install to ensure all dependencies are installed
+        run: npm install
+
+      - name: Build project
+        id: build
+        run: |
+          npm run build
+          echo "✅ Build completed successfully!"
+
+      - name: Print build error
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "❌ Build failed. Please check your code or configuration."
