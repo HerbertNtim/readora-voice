@@ -74,7 +74,7 @@ export const createBook = async (bookData: CreateBook) => {
 
     const book = await Book.create({ ...bookData, slug, totalSegment: 0 });
 
-    revalidatePath('/')
+    revalidatePath('/');
 
     return {
       success: true,
