@@ -188,8 +188,8 @@ export const searchBookSegments = async (
       if (keywords.length === 0) {
         return {
           success: true,
-          data: []
-        }
+          data: [],
+        };
       }
 
       segments = await BookSegment.find({
