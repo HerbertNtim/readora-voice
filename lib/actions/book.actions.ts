@@ -1,4 +1,5 @@
-'use server';
+import { PLAN_LIMITS } from './../subscription-constants';
+('use server');
 
 import { connectToDatabase } from '@/database/mongoose';
 import { CreateBook, TextSegment } from '@/types';
@@ -69,6 +70,24 @@ export const createBook = async (bookData: CreateBook) => {
         success: true,
         bookData: serializeData(existingBook),
         alreadyExists: true,
+      };
+    }
+
+    // Todo: Check subscription limits before creating a book
+    const { getUserPlan } = await import('@/lib/subscription.server');
+    const { PLAN_LIMITS } = await import('@/lib/subscription-constants');
+
+    const plan = await getUserPlan();
+    const limits = PLAN_LIMITS[plan];
+
+    const bookCount = await Book.countDocuments({
+      clerkId: bookData.clerkId,
+    });
+
+    if (bookCount >= limits.maxBooks) {
+      return {
+        success: false,
+        error: `You have reached the maximum number of books allowed for your ${plan} plan (${limits.maxBooks}). Please Upgrade to add more books.`,
       };
     }
 
