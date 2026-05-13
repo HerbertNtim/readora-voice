@@ -113,8 +113,8 @@ const VapiControls = ({ book }: { book: IBook }) => {
 
             <div className="flex flex-wrap gap-3">
               <div className="vapi-status-indicator">
-                <span className={'vapi-status-dot bg-black'} />
-                <span className="vapi-status-text">Ready</span>
+                <span className={`vapi-status-dot ${statusDisplay.color}`} />
+                <span className="vapi-status-text">{statusDisplay.label}</span>
               </div>
 
               <div className="vapi-status-indicator">
@@ -124,7 +124,10 @@ const VapiControls = ({ book }: { book: IBook }) => {
               </div>
 
               <div className="vapi-status-indicator">
-                <span className="vapi-status-text">00:00/15</span>
+                <span className="vapi-status-text">
+                  {formatDuration(duration)} /{' '}
+                  {formatDuration(maxDurationSeconds)}
+                </span>
               </div>
             </div>
           </div>
