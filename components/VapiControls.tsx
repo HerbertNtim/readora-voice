@@ -39,6 +39,31 @@ const VapiControls = ({ book }: { book: IBook }) => {
     }
   }, [isBillingError, limitError, router, clearErrors]);
 
+  const formatDuration = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}: ${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getStatusDisplay = () => {
+    switch (status) {
+      case 'connecting':
+        return { label: 'Connecting...', color: 'vapi-status-dot-connecting' };
+      case 'starting':
+        return { label: 'Starting...', color: 'vapi-status-dot-starting' };
+      case 'listening':
+        return { label: 'Listening', color: 'vapi-status-dot-listening' };
+      case 'thinking':
+        return { label: 'Thinking...', color: 'vapi-status-dot-thinking' };
+      case 'speaking':
+        return { label: 'Speaking', color: 'vapi-status-dot-speaking' };
+      default:
+        return { label: 'Ready', color: 'vapi-status-dot-ready' };
+    }
+  };
+
+  const statusDisplay = getStatusDisplay();
+
   return (
     <>
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
@@ -55,6 +80,9 @@ const VapiControls = ({ book }: { book: IBook }) => {
               priority
             />
             <div className="vapi-mic-wrapper absolute">
+              {isActive && (status === 'speaking' || status === 'thinking') && (
+                <div className="absolute inset-0 rounded-full bg-white animate-ping opacity-75" />
+              )}
               <button
                 onClick={isActive ? stop : start}
                 disabled={status === 'connecting'}
