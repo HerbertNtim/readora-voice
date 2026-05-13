@@ -129,8 +129,12 @@ const UploadForm = () => {
       });
 
       if (!book.success) {
-        toast.error('Unable to add book');
-        throw new Error('Failed to create book');
+        toast.error((book.error as string) || 'Failed to create book');
+        if (book.isBillingError) {
+          router.push('/subscriptions');
+        }
+
+        return;
       }
 
       if (book.alreadyExists) {
