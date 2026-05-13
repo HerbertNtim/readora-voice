@@ -122,6 +122,7 @@ export interface StartSessionResult {
   sessionId?: string;
   maxDurationMinutes?: number;
   error?: string;
+  isBillingError?: boolean;
 }
 
 export interface EndSessionResult {

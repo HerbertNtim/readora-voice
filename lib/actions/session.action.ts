@@ -21,7 +21,7 @@ export const startVoiceSession = async (
     const billingPeriodStart = getCurrentBillingPeriodStart();
 
     // 1. Check for existing ACTIVE session
-    const existingSession = await VoiceSession.findOne({
+    const existingSession = await VoiceSession.findOneAndUpdate({
       clerkId,
       bookId,
       endedAt: { $exists: false }, // or status: "active"
