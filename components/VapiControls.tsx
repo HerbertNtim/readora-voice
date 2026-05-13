@@ -119,7 +119,7 @@ const VapiControls = ({ book }: { book: IBook }) => {
 
               <div className="vapi-status-indicator">
                 <span className="vapi-status-text">
-                  Voice: {book.persona || 'Daniel'}
+                  Voice: {book.persona?.toUpperCase() || 'Daniel'}
                 </span>
               </div>
 
