@@ -5,6 +5,9 @@ import { IBook } from '@/types';
 import { Mic, MicOff } from 'lucide-react';
 import Image from 'next/image';
 import Transcript from './Transcript';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 const VapiControls = ({ book }: { book: IBook }) => {
   const {
@@ -16,8 +19,25 @@ const VapiControls = ({ book }: { book: IBook }) => {
     duration,
     start,
     stop,
+    limitError,
+    isBillingError,
+    maxDurationSeconds,
     clearErrors,
   } = useVapi(book);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (limitError) {
+      toast.error(limitError);
+      if (isBillingError) {
+        router.push('/subscriptions');
+      } else {
+        router.push('/');
+      }
+
+      clearErrors();
+    }
+  }, [isBillingError, limitError, router, clearErrors]);
 
   return (
     <>
