@@ -76,11 +76,21 @@ export const createBook = async (bookData: CreateBook) => {
     const { getUserPlan } = await import('@/lib/subscription.server');
     const { PLAN_LIMITS } = await import('@/lib/subscription-constants');
 
+    const { auth } = await import('@clerk/nextjs/server');
+    const { userId } = await auth();
+
+    if (!userId || userId !== bookData.clerkId) {
+      return {
+        success: false,
+        error: 'Unauthorized',
+      };
+    }
+
     const plan = await getUserPlan();
     const limits = PLAN_LIMITS[plan];
 
     const bookCount = await Book.countDocuments({
-      clerkId: bookData.clerkId,
+      clerkId: userId,
     });
 
     if (bookCount >= limits.maxBooks) {
@@ -91,7 +101,12 @@ export const createBook = async (bookData: CreateBook) => {
       };
     }
 
-    const book = await Book.create({ ...bookData, slug, totalSegment: 0 });
+    const book = await Book.create({
+      ...bookData,
+      clerkId: userId,
+      slug,
+      totalSegment: 0,
+    });
 
     revalidatePath('/');
 
