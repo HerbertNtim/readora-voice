@@ -145,6 +145,7 @@ const VapiControls = ({ book }: { book: IBook }) => {
       </div>
     </>
   );
+  w;
 };
 
 export default VapiControls;
