@@ -6,10 +6,17 @@ import { handleUpload, HandleUploadBody } from '@vercel/blob/client';
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     const body = (await request.json()) as HandleUploadBody;
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+
+    if (!blobToken) {
+      throw new Error('BLOB_READ_WRITE_TOKEN is missing');
+    }
+
     const jsonResponse = await handleUpload({
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      token: blobToken,
       body,
       request,
+
       onBeforeGenerateToken: async () => {
         const { userId } = await auth();
 
@@ -29,12 +36,13 @@ export async function POST(request: Request): Promise<NextResponse> {
           tokenPayload: JSON.stringify({ userId }),
         };
       },
-      onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.log('File uploaded to blob: ', blob.url);
-
+      onUploadCompleted: async ({ tokenPayload }) => {
         const payload = tokenPayload ? JSON.parse(tokenPayload) : null;
-
         const userId = payload?.userId;
+
+        if (!userId) {
+          return;
+        }
       },
     });
 
