@@ -156,7 +156,7 @@ const UploadForm = () => {
       }
 
       form.reset();
-      router.push('/');
+      router.push(`/books/${book.bookData.slug}`);
     } catch (error) {
       console.error('Error Book Uploading pdf ', error);
       toast.error('Failed to upload pdf');
