@@ -157,8 +157,6 @@ export const saveBookSegments = async (
     await BookSegment.insertMany(segmentsToInsert);
     await Book.findByIdAndUpdate(bookId, { totalSegment: segments.length });
 
-    console.log('Book Segments saved successfully...');
-
     return {
       success: true,
       bookSegments: { segmentCreated: segments.length },
@@ -168,8 +166,6 @@ export const saveBookSegments = async (
 
     await BookSegment.deleteMany({ bookId });
     await Book.findByIdAndDelete(bookId);
-
-    console.log('Deleted book segment and book due to error...');
 
     return {
       success: false,
@@ -207,8 +203,6 @@ export const searchBookSegments = async (
 ) => {
   try {
     await connectToDatabase();
-
-    console.log(`Searching for: "${query}" in book ${bookId}`);
 
     const bookObjectId = new mongoose.Types.ObjectId(bookId);
 
@@ -249,8 +243,6 @@ export const searchBookSegments = async (
         .limit(limit)
         .lean();
     }
-
-    console.log(`Search complete. Found ${segments.length} results`);
 
     return {
       success: true,
