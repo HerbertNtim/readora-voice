@@ -5,7 +5,7 @@ import './globals.css';
 import { ui } from '@clerk/ui';
 import Navbar from '@/components/Navbar';
 import { Toaster } from 'sonner';
-import { ThemeProvider } from '@/components/Theme';
+import ThemeProvider from '@/components/Theme';
 
 const ibmPlexSerif = IBM_Plex_Serif({
   variable: '--font-ibm-plex-serif',

@@ -1,3 +1,5 @@
+'use client';
+
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -14,10 +16,10 @@ export function ThemeButton() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={'mx-auto'}>
-        <Button variant="outline" size="icon" className={'cursor-pointer'}>
-          <Sun className="sun-icon" />
-          <Moon className="moon-icon" />
+      <DropdownMenuTrigger>
+        <Button variant="ghost" size="icon-lg" className={'cursor-pointer'}>
+          <Sun className="sun-icon" size={'6'} />
+          <Moon className="moon-icon" size={'6'} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
