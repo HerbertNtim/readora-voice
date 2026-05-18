@@ -5,6 +5,7 @@ import './globals.css';
 import { ui } from '@clerk/ui';
 import Navbar from '@/components/Navbar';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/components/Theme';
 
 const ibmPlexSerif = IBM_Plex_Serif({
   variable: '--font-ibm-plex-serif',
@@ -32,14 +33,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${ibmPlexSerif.variable} ${monaSans.variable} relative font-sans antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ClerkProvider ui={ui}>
-          <Navbar />
-          {children}
-          <Toaster />
-        </ClerkProvider>
+        <ThemeProvider
+          attribute={'class'}
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ClerkProvider ui={ui}>
+            <Navbar />
+            {children}
+            <Toaster />
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

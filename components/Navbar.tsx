@@ -5,6 +5,7 @@ import { Show, SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ThemeButton } from './ThemeButton';
 
 const navLinks = [
   { label: 'Library', href: '/' },
@@ -60,6 +61,8 @@ const Navbar = () => {
                 </Link>
               </div>
             </Show>
+
+            <ThemeButton />
           </div>
         </nav>
       </div>
