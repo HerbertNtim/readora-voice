@@ -18,7 +18,7 @@ const Navbar = () => {
   const { user } = useUser();
 
   return (
-    <header className="w-full fixed z-50 bg-(--bg-primary)">
+    <header className="w-full fixed z-50 bg-(--bg-primary) dark:bg-(--bg-secondary)/70 backdrop-blur-xl border-b border-border shadow-soft-sm">
       <div className="wrapper flex items-center justify-between navbar-height py-4">
         <Link href="/" className="flex items-center gap-0.5">
           <Image
@@ -27,6 +27,7 @@ const Navbar = () => {
             width={42}
             height={26}
             style={{ width: 42, height: 26 }}
+            className="dark:text-white"
           />
           <span className="logo-text">Readora</span>
         </Link>
@@ -41,7 +42,9 @@ const Navbar = () => {
                 key={link.label}
                 className={cn(
                   'nav-link-base',
-                  isActive ? 'nav-link-active' : 'text-black hover:opacity-70',
+                  isActive
+                    ? 'nav-link-active'
+                    : 'text-black dark:text-(--text-primary) hover:opacity-70',
                 )}
               >
                 {link.label}
