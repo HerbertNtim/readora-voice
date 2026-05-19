@@ -32,9 +32,9 @@ export function ThemeButton() {
       className="cursor-pointer"
     >
       {current === 'dark' ? (
-        <Moon className="h-5 w-5" />
+        <Moon className="moon-icon" />
       ) : (
-        <Sun className="h-5 w-5" />
+        <Sun className="sun-icon" />
       )}
     </Button>
   );
