@@ -21,20 +21,20 @@ export function ThemeButton() {
   const current = theme === 'system' ? resolvedTheme : theme;
 
   const toggleTheme = () => {
-    setTheme(current === 'dark' ? 'light' : 'dark');
+    setTheme(current === 'light' ? 'dark' : 'light');
   };
 
   return (
     <Button
       variant="ghost"
-      size="icon-lg"
+      size="lg"
       onClick={toggleTheme}
-      className="cursor-pointer"
+      className="cursor-pointer mx-5"
     >
       {current === 'dark' ? (
-        <Moon className="moon-icon" />
+        <Moon className="theme-icon" />
       ) : (
-        <Sun className="sun-icon" />
+        <Sun className="theme-icon" />
       )}
     </Button>
   );
