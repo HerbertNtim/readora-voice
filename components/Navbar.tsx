@@ -27,7 +27,7 @@ const Navbar = () => {
             width={42}
             height={26}
             style={{ width: 42, height: 26 }}
-            className="dark:text-white"
+            className="dark:invert"
           />
           <span className="logo-text">Readora</span>
         </Link>
