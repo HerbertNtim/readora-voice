@@ -1,38 +1,41 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
 export function ThemeButton() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const current = theme === 'system' ? resolvedTheme : theme;
+
+  const toggleTheme = () => {
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button variant="ghost" size="icon-lg" className={'cursor-pointer'}>
-          <Sun className="sun-icon" size={'6'} />
-          <Moon className="moon-icon" size={'6'} />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="ghost"
+      size="icon-lg"
+      onClick={toggleTheme}
+      className="cursor-pointer"
+    >
+      {current === 'dark' ? (
+        <Moon className="h-5 w-5" />
+      ) : (
+        <Sun className="h-5 w-5" />
+      )}
+    </Button>
   );
 }
