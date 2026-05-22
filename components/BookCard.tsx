@@ -27,4 +27,5 @@ const BookCard = ({ title, author, coverURL, slug }: BookCardProps) => {
     </Link>
   );
 };
+
 export default BookCard;

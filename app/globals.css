@@ -132,10 +132,9 @@
   --radius: 0.625rem;
 
   /* Background system (60 / 30 / 10) */
-  --bg-primary: #121212;
   --bg-secondary: #14141e;
   --bg-navbar: #232325;
-  --bg-card: #14141e;
+  --bg-card: #23262a;
 
   /* Text Colors */
   --text-primary: #f5f6ff;
@@ -148,7 +147,7 @@
   --accent-light: rgba(79, 97, 255, 0.08);
 
   /* Semantic Colors */
-  --success: #4ade80;
+  --dark-success: #b5734c;
   --warning: #fbbf24;
 
   /* Borders (soft glass feel) */
@@ -569,7 +568,7 @@
      BOOKS LIBRARY COMPONENT
      =========================================== */
   .library-hero-card {
-    @apply bg-[#f3e4c7] rounded-[14px] p-5 md:p-6 lg:py-6 lg:px-10 relative overflow-hidden flex items-center;
+    @apply bg-[#f3e4c7] dark:bg-(--bg-card) rounded-[14px] p-5 md:p-6 lg:py-6 lg:px-10 relative overflow-hidden flex items-center;
   }
   .library-hero-content {
     @apply flex flex-col items-center text-center lg:items-center lg:text-left lg:flex-row lg:justify-between gap-4 lg:gap-6 w-full;
@@ -578,10 +577,10 @@
     @apply flex-1 max-w-full lg:max-w-100 flex flex-col gap-3 lg:gap-4 items-center lg:items-start justify-center z-10;
   }
   .library-hero-title {
-    @apply text-[26px] md:text-3xl lg:text-4xl font-semibold text-black tracking-[-0.02em] leading-8 md:leading-10.5 font-serif;
+    @apply text-[26px] md:text-3xl lg:text-4xl font-semibold text-black dark:text-(--text-primary) tracking-[-0.02em] leading-8 md:leading-10.5 font-serif;
   }
   .library-hero-description {
-    @apply text-sm md:text-base text-[#3d485e] leading-5 md:leading-6;
+    @apply text-sm md:text-base text-[#3d485e] dark:text-(--text-secondary) leading-5 md:leading-6;
   }
   .library-hero-illustration {
     @apply flex items-center justify-center mt-2 lg:hidden;
