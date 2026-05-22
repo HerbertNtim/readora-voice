@@ -21,8 +21,12 @@ const HeroSection = () => {
               href="/books/new"
               className="library-cta-primary mt-4 flex items-center justify-center"
             >
-              <span className="text-3xl font-light mb-1 mr-2">+</span>
-              <span className="text-[#212a3b]">Add new book</span>
+              <span className="text-3xl font-light mb-1 mr-2 dark:text-(--text-primary)">
+                +
+              </span>
+              <span className="text-[#212a3b] dark:text-(--text-primary)">
+                Add new book
+              </span>
             </Link>
           </div>
 
