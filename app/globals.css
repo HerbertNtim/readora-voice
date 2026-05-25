@@ -594,7 +594,7 @@
     @apply text-inherit;
 
     &:hover {
-      @apply bg-gray-50 dark:bg-[#fbbf24] dark:text-black;
+      @apply bg-gray-50 dark:bg-[#fbbf24];
       box-shadow: var(--shadow-soft);
     }
   }
