@@ -588,11 +588,13 @@
     @apply hidden lg:flex items-center justify-center flex-1 max-w-100;
   }
   .library-cta-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-white dark:bg-[#b5734c] text-(--text_dark-primary) px-5 py-3 rounded-[10px] font-bold text-base md:text-xl transition-all w-full lg:w-fit;
+    @apply inline-flex items-center justify-center gap-2 bg-white dark:bg-[#b5734c] dark:text-(--text-primary) px-5 py-3 rounded-[10px] font-bold text-base md:text-xl transition-all w-full lg:w-fit;
     font-family: 'IBM Plex Serif', serif;
 
+    @apply text-inherit;
+
     &:hover {
-      @apply bg-gray-50 dark:bg-[#fbbf24];
+      @apply bg-gray-50 dark:bg-[#fbbf24] dark:text-black;
       box-shadow: var(--shadow-soft);
     }
   }
