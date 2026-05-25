@@ -21,8 +21,12 @@ const HeroSection = () => {
               href="/books/new"
               className="library-cta-primary mt-4 flex items-center justify-center"
             >
-              <span className="text-3xl font-light mb-1 mr-2">+</span>
-              <span className="text-[#212a3b]">Add new book</span>
+              <span className="text-3xl font-light mb-1 mr-2 dark:text-white">
+                +
+              </span>
+              <span className="text-[#212a3b] dark:text-white">
+                Add new book
+              </span>
             </Link>
           </div>
 
@@ -56,9 +60,7 @@ const HeroSection = () => {
           <div className="library-steps-card min-w-65 max-w-70 z-10 shadow-soft-md">
             <ul className="space-y-6">
               <li className="library-step-item">
-                <div className="w-10 h-10 min-w-10 min-h-10 rounded-full border border-gray-300 flex items-center justify-center font-medium text-lg">
-                  1
-                </div>
+                <div className="library-step-number">1</div>
                 <div className="flex flex-col">
                   <h3 className="library-step-title text-lg font-bold">
                     Upload PDF
@@ -69,9 +71,7 @@ const HeroSection = () => {
                 </div>
               </li>
               <li className="library-step-item">
-                <div className="w-10 h-10 min-w-10 min-h-10 rounded-full border border-gray-300 flex items-center justify-center font-medium text-lg">
-                  2
-                </div>
+                <div className="library-step-number">2</div>
                 <div className="flex flex-col">
                   <h3 className="library-step-title text-lg font-bold">
                     AI Processing
@@ -82,9 +82,7 @@ const HeroSection = () => {
                 </div>
               </li>
               <li className="library-step-item">
-                <div className="w-10 h-10 min-w-10 min-h-10 rounded-full border border-gray-300 flex items-center justify-center font-medium text-lg">
-                  3
-                </div>
+                <div className="library-step-number">3</div>
                 <div className="flex flex-col">
                   <h3 className="library-step-title text-lg font-bold">
                     Voice Chat
