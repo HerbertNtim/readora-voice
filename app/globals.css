@@ -629,10 +629,10 @@
     @apply font-normal text-sm text-[#222c37] dark:text-(--text-secondary) leading-5;
   }
   .library-search-wrapper {
-    @apply flex items-center bg-white border border-(--border-subtle) rounded-lg overflow-hidden w-full sm:w-80;
+    @apply flex items-center bg-white dark:bg-(--bg-navbar) border border-(--border-subtle) rounded-lg overflow-hidden w-full sm:w-80 p-[2px];
   }
   .library-search-input {
-    @apply flex-1 py-3 px-4 outline-none text-(--text-primary) placeholder:text-(--text-muted);
+    @apply flex-1 py-3 px-4 outline-none text-(--text-primary) dark:text-(--text-primary) placeholder:text-(--text-muted);
   }
   .library-books-grid {
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 md:gap-x-10 gap-y-7 md:gap-y-9;

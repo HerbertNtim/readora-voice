@@ -23,8 +23,8 @@ const HomePage = async ({
     <main className="wrapper container">
       <HeroSection />
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10">
-        <h2 className="text-3xl font-serif font-bold text-[#212a3b]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10 pb-8">
+        <h2 className="text-3xl font-serif font-bold text-[#212a3b] dark:text-(--text-primary)">
           Recent Books
         </h2>
         <Search />
