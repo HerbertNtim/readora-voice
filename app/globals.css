@@ -147,6 +147,7 @@
   --accent-light: rgba(79, 97, 255, 0.08);
 
   /* Semantic Colors */
+  --cta-color: #b5734c;
   --warning: #fbbf24;
 
   /* Borders (soft glass feel) */
@@ -588,7 +589,7 @@
     @apply hidden lg:flex items-center justify-center flex-1 max-w-100;
   }
   .library-cta-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-white dark:bg-[#b5734c] dark:text-(--text-primary) px-5 py-3 rounded-[10px] font-bold text-base md:text-xl transition-all w-full lg:w-fit;
+    @apply inline-flex items-center justify-center gap-2 bg-white dark:bg-(--cta-color) dark:text-(--text-primary) px-5 py-3 rounded-[10px] font-bold text-base md:text-xl transition-all w-full lg:w-fit;
     font-family: 'IBM Plex Serif', serif;
 
     @apply text-inherit;
@@ -608,7 +609,7 @@
     }
   }
   .library-steps-card {
-    @apply bg-white p-4 rounded-[10px];
+    @apply bg-white dark:bg-(--bg-navbar) p-4 rounded-[10px];
     list-style: none;
   }
   .library-steps-card div {
@@ -619,13 +620,13 @@
     list-style: none;
   }
   .library-step-number {
-    @apply w-8 h-8 min-w-8 min-h-8 rounded-full bg-[#fff6e5] border border-(--text-primary) text-(--text-primary) flex items-center justify-center font-semibold text-sm;
+    @apply w-10 h-10 min-w-10 min-h-10 rounded-full border border-gray-300 dark:border-(--warning) flex items-center justify-center font-medium text-lg;
   }
   .library-step-title {
-    @apply font-semibold text-base text-[#222c37] leading-6;
+    @apply font-semibold text-base text-[#222c37] dark:text-(--text-primary) leading-6;
   }
   .library-step-description {
-    @apply font-normal text-sm text-[#222c37] leading-5;
+    @apply font-normal text-sm text-[#222c37] dark:text-(--text-secondary) leading-5;
   }
   .library-search-wrapper {
     @apply flex items-center bg-white border border-(--border-subtle) rounded-lg overflow-hidden w-full sm:w-80;
