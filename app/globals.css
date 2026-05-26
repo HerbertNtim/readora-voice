@@ -273,7 +273,7 @@
     font-family: 'IBM Plex Serif', serif;
   }
   .loading-wrapper {
-    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm;
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-(--bg-card) backdrop-blur-sm;
   }
   .loading-shadow-wrapper {
     @apply rounded-xl p-10 w-fit md:min-w-md;
@@ -285,7 +285,7 @@
     @apply animate-spin origin-center mx-auto;
   }
   .loading-title {
-    @apply text-2xl font-bold text-(--text-primary);
+    @apply text-2xl font-bold text-(--text-primary) dark:text-(--text-primary);
   }
   .loading-progress {
     @apply w-full space-y-2 text-sm;
