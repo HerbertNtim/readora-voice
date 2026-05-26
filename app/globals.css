@@ -738,6 +738,9 @@
   .book-card-3d {
     @apply relative w-full transition-transform duration-200;
   }
+  .book-card-figure {
+    @apply flex flex-col h-full;
+  }
   .book-card-3d-hover {
     @apply group-hover:-translate-y-1;
   }
@@ -745,10 +748,10 @@
     @apply absolute -left-1 top-2 bottom-2 w-3 bg-linear-to-r from-[#8B7355] to-[#A08060] rounded-l-md z-0;
   }
   .book-card-cover-wrapper {
-    @apply relative bg-white rounded-[14px] overflow-hidden flex items-center justify-center h-51.25 md:h-60;
+    @apply relative bg-white dark:bg-(--bg-navbar) rounded-[14px] overflow-hidden flex items-center justify-center h-60 md:h-80 w-60;
   }
   .book-card-cover {
-    @apply w-auto h-42.5 md:h-50 object-cover rounded-lg;
+    @apply object-cover transition-transform duration-300;
     box-shadow: var(--shadow-book);
   }
   .book-card-meta {
