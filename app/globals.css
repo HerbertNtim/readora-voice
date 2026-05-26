@@ -758,11 +758,11 @@
     @apply mt-4 md:mt-5 flex-1 flex flex-col gap-1;
   }
   .book-card-title {
-    @apply font-bold text-[#212a3b] line-clamp-1 text-base md:text-xl leading-5.5 md:leading-7.5;
+    @apply font-bold text-[#212a3b] dark:text-(--text-primary) line-clamp-1 text-base md:text-xl leading-5.5 md:leading-7.5;
     font-family: 'IBM Plex Serif', serif;
   }
   .book-card-author {
-    @apply text-sm md:text-base font-medium text-[#3d485e] line-clamp-1;
+    @apply text-sm md:text-base font-medium text-[#3d485e] dark:text-(--text-secondary) line-clamp-1;
   }
 
   /* ===========================================
