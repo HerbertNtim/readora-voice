@@ -769,7 +769,7 @@
      UPLOAD FORM COMPONENT
      =========================================== */
   .upload-dropzone {
-    @apply flex flex-col items-center justify-center h-41.25 bg-white rounded-[6px] cursor-pointer transition-all;
+    @apply flex flex-col items-center justify-center h-41.25 bg-white dark:bg-(--bg-navbar) rounded-[6px] cursor-pointer transition-all;
 
     &:hover {
       @apply bg-gray-50;
@@ -802,7 +802,7 @@
     }
   }
   .form-label {
-    @apply text-lg font-medium text-black mb-2 block;
+    @apply text-lg font-medium text-black dark:text-(--text-primary) mb-2 block;
   }
   .form-input {
     @apply w-full p-4 bg-white rounded-lg text-lg font-medium text-[#222] placeholder:text-[#999];
