@@ -306,7 +306,7 @@
     @apply flex flex-col items-center justify-center gap-3 rounded-[28px] border-2 border-dashed border-(--border-subtle) bg-(--accent-light) px-6 py-10 text-center text-[#3d485e] transition hover:border-[#663820] hover:bg-[#fff6e5] cursor-pointer;
   }
   .voice-selector-option {
-    @apply rounded-[26px] border border-(--border-subtle) bg-white px-4 py-4 transition;
+    @apply rounded-[26px] border border-(--border-subtle) bg-white dark:bg-(--bg-card) px-4 py-4 transition;
   }
   .voice-selector-option-selected {
     @apply border-[#663820] bg-[#fff4e8] shadow-(--shadow-soft-md);
@@ -805,7 +805,7 @@
     @apply text-lg font-medium text-black dark:text-(--text-primary) mb-2 block;
   }
   .form-input {
-    @apply w-full p-4 bg-white rounded-lg text-lg font-medium text-[#222] placeholder:text-[#999];
+    @apply w-full p-5 bg-white rounded-lg text-lg font-medium text-[#222] placeholder:text-[#999];
   }
 
   /* ===========================================

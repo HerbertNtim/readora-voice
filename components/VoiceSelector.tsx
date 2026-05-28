@@ -23,7 +23,9 @@ const VoiceSelector = ({
       >
         {/* Male Voices */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-[#777]">Male Voices</h4>
+          <h4 className="text-sm font-medium text-[#777] dark:text-(--text-secondary)">
+            Male Voices
+          </h4>
           <div className="voice-selector-options">
             {voiceCategories.male.map((voiceId) => {
               const voice = voiceOptions[voiceId as keyof typeof voiceOptions];
@@ -56,7 +58,7 @@ const VoiceSelector = ({
                           <div className="w-2 h-2 rounded-full bg-[#663820]" />
                         )}
                       </div>
-                      <span className="font-bold text-[#212a3b]">
+                      <span className="font-bold text-[#212a3b] dark:text-(--text-secondary  )">
                         {voice.name}
                       </span>
                     </div>
