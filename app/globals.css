@@ -772,7 +772,7 @@
     @apply flex flex-col items-center justify-center h-41.25 bg-white dark:bg-(--bg-navbar) rounded-[6px] cursor-pointer transition-all;
 
     &:hover {
-      @apply bg-gray-50;
+      @apply bg-gray-50 dark:bg-(--bg-card);
     }
   }
   .upload-dropzone-uploaded {
@@ -782,14 +782,14 @@
       @apply text-[#663820];
     }
     .upload-dropzone-hint {
-      @apply text-[#8B7355];
+      @apply text-[#8B7355] dark:text-(--text-muted);
     }
   }
   .upload-dropzone-icon {
     @apply w-12 h-12 mb-2 text-[#8B7355];
   }
   .upload-dropzone-text {
-    @apply text-[#777] text-lg font-medium text-center;
+    @apply text-[#777] dark:text-(--text-secondary) text-lg font-medium text-center;
   }
   .upload-dropzone-hint {
     @apply text-[#777] text-sm mt-1;
